@@ -1,0 +1,2 @@
+# make the dcdc-usb device writeable
+ATTRS{idProduct}=="d003",ATTRS{idVendor}=="04d8",MODE="666",GROUP="input"
