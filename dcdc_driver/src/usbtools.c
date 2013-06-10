@@ -105,7 +105,7 @@ void dcdc_stop(struct dcdc_cfg *cfg)
       if (cfg->debug) warnx("close complete");
 }
 
-int send(struct dcdc_cfg *cfg, unsigned char *data, int size)
+int send_usb(struct dcdc_cfg *cfg, unsigned char *data, int size)
 {
 	if (data == NULL)
 		return -1;
@@ -139,7 +139,7 @@ int get_all_values(struct dcdc_cfg *cfg)
       packet[0] = DCDCUSB_GET_ALL_VALUES;
       packet[1] = 0;
 
-      return send(cfg, packet, 2);
+      return send_usb(cfg, packet, 2);
 }
 
 int send_command(struct dcdc_cfg *cfg, uint8_t command, uint8_t value)
@@ -152,7 +152,7 @@ int send_command(struct dcdc_cfg *cfg, uint8_t command, uint8_t value)
       packet[3] = 0;
       packet[4] = 0;
 
-      return send(cfg, packet, 5);
+      return send_usb(cfg, packet, 5);
 }
 
 int read_status(struct dcdc_cfg *cfg, uint8_t * data)

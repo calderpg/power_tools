@@ -16,7 +16,7 @@ struct dcdc_cfg {
 
 int dcdc_init(struct dcdc_cfg *cfg, int debug);
 void dcdc_stop(struct dcdc_cfg *cfg);
-int send(struct dcdc_cfg *cfg, unsigned char *data, int size);
+int send_usb(struct dcdc_cfg *cfg, unsigned char *data, int size);
 int receive(struct dcdc_cfg *cfg, unsigned char *data, int length, int timeout);
 int get_all_values(struct dcdc_cfg *cfg);
 int send_command(struct dcdc_cfg *cfg, uint8_t command, uint8_t value);

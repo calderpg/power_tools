@@ -22,8 +22,14 @@ rosbuild_genmsg()
 #rosbuild_gensrv()
 
 #common commands for building c++ executables and libraries
+#build the common library
 rosbuild_add_library(usbtools src/usbtools.c)
+#build the command-line executable for setting & getting data
 rosbuild_add_executable(debugtool src/debugtool.c)
+target_link_libraries(debugtool usbtools usb)
+#build the command-line executable for monitoring the converter
 rosbuild_add_executable(voltagemonitor src/voltagemonitor.c)
-target_link_libraries(debugtool usbtools libusb)
-target_link_libraries(voltagemonitor usbtools libusb)
+target_link_libraries(voltagemonitor usbtools usb)
+#build the ROS node
+rosbuild_add_executable(dcdc_node src/dcdc_node.cpp)
+target_link_libraries(dcdc_node usbtools usb)
