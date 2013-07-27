@@ -1,0 +1,5 @@
+string OutputID
+bool EnableOutput
+float64 NewOutputVoltage
+---
+float64 SetOutputVoltage
