@@ -4,7 +4,7 @@ duration TimeToEmpty
 duration TimeToFull
 # Information about output state
 int32 NumOutputs
-string[] OutputId
+string[] OutputID
 float64[] OutputPower
 float64[] OutputVoltage
 float64[] NominalOutputVoltage
