@@ -1,35 +1,36 @@
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
+cmake_minimum_required(VERSION 2.8.3)
+project(dcdc_driver)
 
-# Set the build type.  Options are:
-#  Coverage       : w/ debug symbols, w/o optimization, w/ code-coverage
-#  Debug          : w/ debug symbols, w/o optimization
-#  Release        : w/o debug symbols, w/ optimization
-#  RelWithDebInfo : w/ debug symbols, w/ optimization
-#  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
-set(ROS_BUILD_TYPE RelWithDebInfo)
+find_package(catkin REQUIRED COMPONENTS roscpp message_generation sensor_msgs std_msgs power_msgs)
 
-rosbuild_init()
+## Generate added messages and services with any dependencies listed here
+generate_messages(
+  DEPENDENCIES
+  sensor_msgs
+  std_msgs
+  power_msgs
+)
 
-#set the default path for built executables to the "bin" directory
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-#set the default path for built libraries to the "lib" directory
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+catkin_package(
+  INCLUDE_DIRS include
+  CATKIN_DEPENDS roscpp message_runtime sensor_msgs std_msgs power_msgs
+  DEPENDS system_lib
+)
 
-#uncomment if you have defined messages
-rosbuild_genmsg()
-#uncomment if you have defined services
-#rosbuild_gensrv()
+include_directories(include
+  ${catkin_INCLUDE_DIRS}
+)
 
-#common commands for building c++ executables and libraries
-#build the common library
-rosbuild_add_library(usbtools src/usbtools.c)
-#build the command-line executable for setting & getting data
-rosbuild_add_executable(debugtool src/debugtool.c)
-target_link_libraries(debugtool usbtools usb)
-#build the command-line executable for monitoring the converter
-rosbuild_add_executable(voltagemonitor src/voltagemonitor.c)
-target_link_libraries(voltagemonitor usbtools usb)
-#build the ROS node
-rosbuild_add_executable(dcdc_node src/dcdc_node.cpp)
-target_link_libraries(dcdc_node usbtools usb)
+## Build the common library
+add_library(usbtools src/usbtools.c)
+# Build the command-line executable for monitoring the converter
+add_executable(debugtool src/debugtool.c)
+target_link_libraries(debugtool ${catkin_LIBRARIES} usbtools usb)
+# Build the command-line executable for monitoring the converter
+add_executable(voltagemonitor src/voltagemonitor.c)
+target_link_libraries(voltagemonitor ${catkin_LIBRARIES} usbtools usb)
+# Build the ROS node
+add_executable(dcdc_node src/dcdc_node.cpp)
+add_dependencies(dcdc_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(dcdc_node ${catkin_LIBRARIES} usbtools usb)
+
