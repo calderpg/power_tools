@@ -1,60 +1,59 @@
-Data dumper for DCDC USB power supply unit
-==========================================
+power_tools
+===========
 
-Device description: 
+Message definitions and hardware drivers for power supply devices using ROS
 
-http://www.mini-box.com/DCDC-USB?sc=8&category=981
+*While this code is freely licensed (2-clause BSD), I do ask that you send [me](mailto:calder.pg@gmail.com) an email if possible so I can see who is using this software.*
 
-Author
-------
+Repository structure
+--------------------
+Unlike earlier Catkinized software we have provided, this repository does not contain a Catkin workspace. As we expect that other teams will be well on their way to migrating to ROS Groovy, the difficulties of managing multiple workspaces do not justify the convenience of distributing these packages in their own workspace. As such, you will need to clone this repository inside the `src/` directory of an existing Catkin workspace.
 
-Joel Lehtonen, joel.lehtonen ät iki.fi. Feel free to contact!
+Please note that this software is structured for ROS Groovy+, and is incompatible with ROS Fuerte and earlier.
 
-License
--------
+This repository is structured around 3 core packages:
 
-GNU GPL version 2 or (at your option) later. COPYING missing at the moment. :-)
+1.  `power_msgs` - Message and serive definitions for power devices. The PowerState message is designed to be suitable for all types of power devices, ranging from DC-DC converters to automotive power supplies to even laptop batteries.
 
-Requirements:
--------------
+2.  `dcdc_driver` - This package provides a ROS driver for the Mini-Box DCDC programable dc-dc converter.
 
-- Linux 2.6
-- gcc (build time)
-- scons (build time)
+3.  `dbus_power_monitor` - This package provides a monitor for the UPower daemon, which provides the "standard" interface to system power state on Linux desktop systems. For example, this allows a robot using a laptop to monitor the state of the laptop's battery(s).
 
-Usage
------
+Stability and development status
+--------------------------------
+`power_msgs` - This package is currently stable. Additional fields in the PowerState message are not currently planned. Additional service may be defined, but they will no break compatibility with the current interface.
 
-To compile, type 'scons'. If command is not found, please install
-package 'scons' with apt-get or similar package tool first.
+`dcdc_driver` - Currently stable, although better error recovery will be added in the near future. Output voltage control will also be added in the comming months.
 
-To get some information:
+`dbus_power_monitor` - Currently stable, will be updated to maintain compatibility with dbus and UPower daemon as needed.
 
-$ sudo ./debugtool
+Depencies
+---------
+1.  Full ROS Groovy installation - on Ubuntu systems: `$ sudo apt-get install ros-groovy-desktop-full`
 
-To set output voltage (VOUT):
+Build and usage instructions
+----------------------------
+First, clone this repository:
+```
+$ cd /your/catkin/workspace/src
+$ git clone https://github.com/calderpg/power_tools.git
+$ rospack profile
+```
+To build all packages in this repository:
 
-$ sudo ./debugtool 13.5
+```
+(in the surrounding Catkin workspace directory)
+$ catkin_make
+```
+To build a particular package in the repository:
 
-To monitor voltage, measurement every 10.5 seconds:
+```
+(in the surrounding Catkin workspace directory)
+$ catkin_make --pkg <package name>
+```
+To use, you must source the workspace:
 
-$ sudo ./voltagemonitor 10.5
-
-TODO
-----
-
-A polished and elegant tool. This is a piece of crappiness.
-
-Thanks
-------
-
-Idea and some code I got from:
-
-http://www.ros.org/wiki/minibox_dcdc
-
-Thank you ROS. I'd like to see you to do Linux kernel driver for
-it. But I may do it some day if I've got enough time.
-
-Thanks to Minibox for the original Windows sources, too. It would have
-been very tricky to do voltage conversions without the original
-implementation
+```
+(in the surrounding Catkin workspace directory)
+$ source devel/setup.bash
+```
