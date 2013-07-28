@@ -7,7 +7,7 @@ Message definitions and hardware drivers for power supply devices using ROS
 
 Repository structure
 --------------------
-Unlike earlier Catkinized software we have provided, this repository does not contain a Catkin workspace. As we expect that other teams will be well on their way to migrating to ROS Groovy, the difficulties of managing multiple workspaces do not justify the convenience of distributing these packages in their own workspace. As such, you will need to clone this repository inside the `src/` directory of an existing Catkin workspace.
+You will need to clone this repository inside the `src/` directory of an existing Catkin workspace.
 
 Please note that this software is structured for ROS Groovy+, and is incompatible with ROS Fuerte and earlier.
 
@@ -21,7 +21,7 @@ This repository is structured around 3 core packages:
 
 Stability and development status
 --------------------------------
-`power_msgs` - This package is currently stable. Additional fields in the PowerState message are not currently planned. Additional service may be defined, but they will no break compatibility with the current interface.
+`power_msgs` - This package is currently stable. Additional fields in the PowerState message are not currently planned. Additional services may be defined, but they will not break compatibility with the current interface.
 
 `dcdc_driver` - Currently stable, although better error recovery will be added in the near future. Output voltage control will also be added in the comming months.
 
