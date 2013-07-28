@@ -21,8 +21,9 @@ power_msgs::PowerState GetDCDCState(struct dcdc_cfg *cfg)
     state.Manufacturer = "Mini-Box";
     state.DeviceName = "DC-DC";
     state.DeviceID = g_device_id;
+    state.DeviceType = state.Converter;
     state.NumCells = 0;
-    state.CellType = state.None;
+    state.CellType = state.NoType;
     state.NumInputs = 2;
     state.NumOutputs = 1;
     state.SystemTemperature = NAN;
