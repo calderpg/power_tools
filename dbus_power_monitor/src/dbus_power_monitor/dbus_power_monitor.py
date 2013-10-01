@@ -60,7 +60,9 @@ class DBUS_UPOWER_MONITOR:
         state.RatedCapacity = float(properties["EnergyFullDesign"])
         state.CurrentCapacity = float(properties["EnergyFull"])
         state.NumOutputs = 1
-        state.OutputID.append("Output")
+        state.OutputID.append("output")
+        state.NumInputs = 1
+        state.InputID.append("input")
         state.OutputVoltage.append(float(properties["Voltage"]))
         state.OutputPower.append(float(properties["EnergyRate"]))
         return state

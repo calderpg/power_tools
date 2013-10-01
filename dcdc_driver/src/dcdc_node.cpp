@@ -49,6 +49,9 @@ power_msgs::PowerState GetDCDCState(struct dcdc_cfg *cfg)
     }
     if (data[0] == DCDCUSB_RECV_ALL_VALUES)
     {
+        state.InputID[0] = "ignition";
+        state.InputID[1] = "input";
+        state.OutputID[0] = "output";
         state.InputVoltage[0] = (double)data[4] * 0.1558f;
         state.InputVoltage[1] = (double)data[3] * 0.1558f;
         state.OutputVoltage[0] = (double)data[5] * 0.1170f;
@@ -86,7 +89,6 @@ int main(int argc, char** argv)
         return 1;
     }
     ROS_INFO("Connected to the DCDC converter");
-    fflush(stdout);
     ros::Rate spin_rate(g_update_rate);
     while (ros::ok())
     {
