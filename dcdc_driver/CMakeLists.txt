@@ -3,14 +3,6 @@ project(dcdc_driver)
 
 find_package(catkin REQUIRED COMPONENTS roscpp message_generation sensor_msgs std_msgs power_msgs)
 
-## Generate added messages and services with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-  sensor_msgs
-  std_msgs
-  power_msgs
-)
-
 catkin_package(
   INCLUDE_DIRS include
   CATKIN_DEPENDS roscpp message_runtime sensor_msgs std_msgs power_msgs

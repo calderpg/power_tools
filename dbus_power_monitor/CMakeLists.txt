@@ -16,11 +16,11 @@ find_package(catkin REQUIRED COMPONENTS message_generation power_msgs rospy std_
 catkin_python_setup()
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-  power_msgs
-  std_msgs
-)
+#generate_messages(
+#  DEPENDENCIES
+#  power_msgs
+#  std_msgs
+#)
 
 ###################################
 ## catkin specific configuration ##
