@@ -19,34 +19,44 @@ float64 RatedCapacity
 float64 CurrentCapacity
 float64 PercentCharge
 float64 CurrentCharge
-int32 Unknown=0
-int32 LinePower=1
-int32 Battery=2
-int32 UPS=3
-int32 Converter=10
-int32 DeviceType
-int32 Powered=0
-int32 Charging=1
-int32 Discharging=2
-int32 Empty=3
-int32 FullyCharged=4
-int32 PendingCharge=5
-int32 PendingDischarge=6
-int32 SystemState
+# Device options
+uint8 Unknown=0
+uint8 LinePower=1
+uint8 Battery=2
+uint8 UPS=3
+uint8 Converter=10
+# Type of power device
+uint8 DeviceType
+# Possible system states
+uint8 Powered=0
+uint8 Charging=1
+uint8 Discharging=2
+uint8 Empty=3
+uint8 FullyCharged=4
+uint8 PendingCharge=5
+uint8 PendingDischarge=6
+# State of the system
+uint8 SystemState
+# Number of cells
 int32 NumCells
-int32 NoType=0
-int32 LiIon=1
-int32 LiPo=2
-int32 LiFePO4=3
-int32 SLA=4
-int32 NiCd=5
-int32 NiMH=6
-int32 CellType
+# Cell types (basic type)
+uint8 NoType=0
+uint8 LiIon=1
+uint8 LiPo=2
+uint8 LiFePO4=3
+uint8 SLA=4
+uint8 NiCd=5
+uint8 NiMH=6
+# Cell type
+uint8 CellType
+# Nominal values for the cells (all cells must be the same)
 float64 NominalCellVoltage
 float64 NominalCellCharge
+# Actual values for each cell
 float64[] CellVoltage
 float64[] CellCharge
 float64[] CellTemperature
+# Information about the full power system
 float64 SystemTemperature
 string DeviceName
 string DeviceID

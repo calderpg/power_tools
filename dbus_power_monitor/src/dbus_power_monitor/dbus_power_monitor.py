@@ -28,6 +28,7 @@ class DBUS_UPOWER_MONITOR:
             self.property_interfaces[power_device_path] = (property_interface)
             publisher_name = rospy.get_namespace() + power_device_path.split("/")[-1]
             self.publishers[power_device_path] = rospy.Publisher(publisher_name, PowerState)
+        rospy.loginfo("Connected UPower devices:\n" + str(self.publishers.keys()))
         rospy.loginfo("...Device connections and publishers ready")
 
     def Loop(self, update_rate):
